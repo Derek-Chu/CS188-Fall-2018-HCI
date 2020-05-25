@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Capital Game!</title>
+      <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="jquery/css/ui-lightness/jquery-ui-1.10.0.custom.css" rel="stylesheet" />  <link href="./capital_game.css" rel="stylesheet" />
+  </head>
+  <body>
+    <!--Your HTML here-->
+    <script src="jquery/js/jquery-1.9.0.min.js"></script>
+    <script src="jquery/js/jquery-ui-1.10.0.custom.min.js"></script>
+    <script src="./country_capital_pairs.js"></script>
+    <script src="./capital_game.js"></script>
+    <script>
+      $( function() {
+          var country_capital_pairs = pairs
+          var capitals = new Array()
+        for (var i = 0, j = country_capital_pairs.length; i < j; i++) {
+            capitals.push(country_capital_pairs[i].capital)
+        }
+
+        $("#pr2__answer").autocomplete({
+            /*source: capitals,
+            select: function (event, ui) {
+                button(ui.item.label)
+                random()
+                document.getElementById("pr2__answer").focus()
+            }*/
+            minLength: 2, 
+          source: function( request, response ) {
+            var matcher = new RegExp( $.ui.autocomplete.escapeRegex( request.term ), "i" );
+            response( $.grep( capitals, function( value ) {
+                value = value.label || value.value || value;
+                return matcher.test(value);
+            }) );
+          }, 
+          select: function (event, ui) {
+              
+              button(ui.item.label)
+              random()
+              $("#pr2__answer").val('');
+              event.preventDefault()
+          }
+        });
+      } );
+    </script>
+    <div class="center-div">
+          <h1 align="left">Do you know the capital of this country?</h1>
+          <table class="collapse" id="tablethingy">
+              <tr>
+                  <th class="elements" align="left">Country</th>
+                  <th class="elements" align="left">Capital</th>
+                  <th class="elements" align="left">Answer</th>
+              </tr>
+              <tr>
+                  <td class="elements" align="left" id="pr2__question">country_capital_pairs[1].country</td>
+                  <td class="elements" align="left">
+                    <div class="ui-widget">
+                            <input type="text" onfocus="this.value=''" id="pr2__answer"/>
+                      </div>
+                      <!--<input type="text" onfocus="this.value=''" id="pr2__answer"/>-->
+                  </td>
+                  <td class="elements" align="left"><button id="pr2__submit" onclick="button(''); random();">See Answer</button></td>
+              </tr>
+              <tr>
+                  <td class="elements" colspan="3">
+                      <input type="radio" onclick="allo();"name="tabletype" value="All" id="allstuff" checked>All
+                      <input type="radio" onclick="correcto();" name="tabletype" value="Correct Only" id="correctstuff">Correct Only
+                      <input type="radio" onclick="wrongo();" name="tabletype" value="Wrong Only" id="wrongstuff">Wrong Only
+                  </td>
+              </tr>
+          </table>
+      </div>
+  </body>
+</html>

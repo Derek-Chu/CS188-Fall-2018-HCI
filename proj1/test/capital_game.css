@@ -1,0 +1,22 @@
+body {
+    background-color: #eee;
+}
+
+/*your code here*/
+.center-div {
+    margin-left: auto;
+    margin-right: auto;
+    width: 633px;
+}
+.elements {
+    padding: 5px;
+}
+
+table td {
+    border-top: 1px solid black;
+    border-bottom: 1px solid #cccccc;
+}
+
+.collapse {
+    border-collapse: collapse;
+}
